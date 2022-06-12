@@ -1,4 +1,5 @@
 # Logfile Download
+
 Dieses Python Skript liest die Logfiles aus einem Pythovoltaik Speicher eines Herstellers aus Leipzig aus. Falls auf euerem Rechner noch kein Python3 installiert, ist bitte erst die *README_Python_install.md* lesen.
 
 Bei GitHub seid ihr schon gelandet und habt die README Datei gefunden. Jetzt müsst ihr nur noch das ganze auf euren Computer herunterladen. 
