@@ -3,15 +3,21 @@
 Dieses Python Skript liest die Logfiles aus einem Pythovoltaik Speicher eines Herstellers aus Leipzig aus. Falls auf euerem Rechner noch kein Python3 installiert, ist bitte erst die *README_Python_install.md* lesen.
 
 Bei GitHub seid ihr schon gelandet und habt die README Datei gefunden. Jetzt müsst ihr nur noch das ganze auf euren Computer herunterladen. 
-Dazu einfach oben rechts auf den grünen Butten der mit *Code* beschriftet ist anklicken. Es öffnet sich ein kleines Fenster und dort klickt ihr auf Download ZIP. Nach dem Download einfach in euer Download Verzeichnis schauen und die ZIP Entpacken.
+
+Dazu einfach oben rechts den grünen Butten der mit *Code* beschriftet ist anklicken. Es öffnet sich ein kleines Fenster und dort klickt ihr auf Download ZIP. Nach dem der Download abgeschlossen ist kann die Datei enpackt werden.
 
 Bei mir sieht das dann so aus. 
-*C:\Users\galli\Downloads\Logfiles-aus-Photovoltaikspeicher-auslesen-main\Logfiles-aus-Photovoltaikspeicher-auslesen-main*
-Jetzt könnt ihr das Verzeichnis *Logfiles-aus-Photovoltaikspeicher-auslesen-main* in dem die ganzen Dateien enthalten sind irgendwohin schieben, wo ihr es haben möchtet. 
+**C:\Users\galli\Downloads\Logfile-Download-main\Logfile-Download-main**
 
-Dort bearbeitet ihr erst einmal die **config.ini** deren Aufbau ich hier erkläre.
+Jetzt könnt ihr das Verzeichnis **Logfile-Download-main** in dem alle nötigen Dateien enthalten sind an eine beliebige Stelle verschieben wie z.B. **C:\Program Files**
 
-Der Aufbau der Datei sieht dann so aus:
+
+### Konfiguration anpassen
+
+Jetzt müssen noch ein paar kleinigkeiten in der **config.ini** angepasst werden.
+
+
+Der Aufbau der Datei sieht so aus:
 ```
 [conf]
 ipAddress = 192.168.178.27
@@ -21,23 +27,30 @@ jahr = 0
 pfad = logfiles
 append = no
 ```
-**ipSpeicher:**
-Ist die IP-Adresse des Stromspeichers. Diese kann auf dem Display des Speichers abgelesen werden. Das funktioniert auch in der Fernabschaltung.
+**ipAddress:**
+Ist die IP-Adresse des Stromspeichers. Diese kann auf dem Display des Speichers abgelesen werden.
 
 **tag, monat und jahr:**
-Hier wird angegeben ab welchen Datum die Logfiles aus dem Speicher gelesen werden sollen. Am idealsten ist natürlich das Inbetriebnahmedatum des Speichers.
+Vor dem ersten Start wenn ihr noch keine Logfiles aus dem Speicher herunter geladen habt tragt ihr hier am besten das Datum der Inbetriebnahme ein.
+Wenn alles Logfiles heruntergeladen sind und man auf dem aktuellen Stand ist kann man die Werte: tag, monat, jahr mit einer 0 angeben. Das ist für den Zeitgesteuerten aufruf des Skripts gedacht.
+Dabei wird nur das Logfile des aktuellen Tages heruntergeladen. Am besten man ruft das Skript jeden Tag um 23:59 Uhr auf. Dann hat man immer das Vollständige Logfile für diesen Tag.
 
 **pfad:**
-Hier am besten alles so lassen wir es voreingestellt ist. Die Logfeils werden dann beim Ausführen des Skripts automatisch in einen Ordner namens logfiles geschrieben. Ist dieser noch nicht vorhanden wird er automascht erstellt.
+Hier am besten alles so lassen wie es voreingestellt ist. Die Logfeils werden dann beim Ausführen des Skripts automatisch in einen Ordner namens **logfiles** unterhalb des ausführenden Verzeichnisses.
+Das Verzeichnis muss nicht erstellt werden das passiert bei bedarf automatisch.
 
 **append:** 
-Mit diesem Parameter kann eingestellt werden ob für jeden Tag eine eigene Datei erstellt wird oder ob alles in eine Datei geschrieben wird. Ist in den Parametern *tag, monat oder jahr* eine 0 eingetragen ist diese funktion gesperrt und es werden immer alle Logfiles in einzelne Dateien geschrieben. Da beim aktiven weiterschreiben (eine Datei) wird die Datei erst geleert und dann neu gefüllt.
+Mit diesem Parameter kann eingestellt werden ob für jeden Tag eine eigene Datei erstellt wird oder ob alles in eine Datei geschrieben wird. Ist in den Parametern **tag, monat oder jahr** eine **0** eingetragen ist diese funktion gesperrt und es werden immer alle Logfiles in einzelne Dateien geschrieben.
 
-Mögliche einstellungen sind *yes* und *no*
+Mögliche Parameter sind **yes** und **no**
 
-Nachdem das geschehen ist kann man bei installiertem Python drei mit der rechten Maustaste auf auf die Datei *LogfileDownload.py* klicken und anschließend auf *Öffnen mit* > *Python* anklicken. Ein das Terminal Fenster öffnet sich und das Skript sollte alle benötigten nach vorgabe aus der *config.ini* herunterladen und in das Verzeichnis *logfiles* schreiben.
+Jetzt ist unsere **config.ini** für den eigenen Zweck Konfiguriert und wir sollten es jetzt mal ausführen.
 
-Man kann auch auf mit der rechten Maustast auf das Verzeichnis klicken und *In Terminal öffnen* auswählen. Auch hier öffnet sich das schwarze Terminal Fenster. In diesem kann man jetzt mit dem Befehl: **python3 LogfileDownload.py** ebenfals das Skript starten. Sollte es eine Fehlermeldung geben das Pythen nicht funktioniert habt ihr was bei der Installation falsch gemacht.
+Dazu klicken wir mit der rechten Maustaste auf die Datei *LogfileDownload.py* und anschließend auf **Öffnen mit >** ein neues Fenster erscheint und dort klicken wir **Python** an. Ein Terminal-Fenster öffnet sich. Jetzt werden alle Logfiles nach vorgabe der **config.ini** heruntergeladen.
+
+Ein weiterer Weg wäre die PowerShell zu öffnen und in das Verzeichnis zu wechsel in dem sich das Skript befindet wechseln. Als dritten Weg kann man aus dem Datei-Explorer heraus ein Terminal-Fenster öffnen. Dazu müssen wir in dem Verzeichnis sein in dem das Skript liegt. Dann mit der rechten Maustaste in einem freien Bereich klicken. In dem erscheinenden Fenster klicken wir auf **In Terminal öffnen**
+
+Jetzt können wir das Skript mit dem Befehl: **python3 LogfileDownload.py** starten.
 
 #### Zeitsteuerung unter Linux
 
@@ -64,7 +77,3 @@ Bei mir ist es z.B.
 # Schreibt zu jedem vollen Stunden das Logfile auf die Speicherkarte
 0 * * * * /usr/bin/python3 XXXX/LogfileDownload.py
 ```
-
-
-
-# Logfile-Downloader
